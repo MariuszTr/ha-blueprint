@@ -1,5 +1,5 @@
 blueprint:
-  name: Wstrzymaj mediaplayer podczas rozmowy telefonicznej.
+  name: Wstrzymaj odtwarzacz multimedialny podczas rozmowy telefonicznej.
   description: >
     Wstrzymaj odtwarzacz multimedialny, gdy telefon dzwoni.
     Tylko wtedy, gdy osoba jest w domu, a odtwarzacz multimedialny odtwarza.
