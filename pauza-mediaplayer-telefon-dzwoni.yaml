@@ -1,34 +1,33 @@
 blueprint:
-  name: Pause mediaplayer when calling.
+  name: Wstrzymaj mediaplayer podczas rozmowy telefonicznej.
   description: >
-    Pause a mediaplayer when phone rings or is calling.
-    Only when person is home and the mediaplayer is playing.
-    Base on https://gist.github.com/JackPoint/2375dd5d15f0b4c52161207170c14f60
+    Wstrzymaj odtwarzacz multimedialny, gdy telefon dzwoni.
+    Tylko wtedy, gdy osoba jest w domu, a odtwarzacz multimedialny odtwarza.
   domain: automation
   input:
     phone_state:
-      name: Phone State sensor
-      description: All sensors form the mobile app. Select the phone state sensor here.
+      name: Czujnik stanu telefonu
+      description: Wszystkie czujniki tworzone przez aplikację mobilną. Tutaj wybierz czujnik stanu telefonu.
       selector:
         entity:
           integration: mobile_app
           domain: sensor
     person:
-      name: Person
-      description: Select the person that needs to be at the zone selected.
+      name: Osoba
+      description: Wybierz osobę, która musi znajdować się w wybranej strefie.
       selector:
         entity:
           domain: person
     zone:
-      name: Zone
-      description: Select the Zone the person needs to be in.
+      name: Strefa
+      description: Wybierz strefę, w której dana osoba ma się znajdować.
       default: zone.home
       selector:
           entity:
             domain: zone
     media_player: 
-      name: Media Player
-      description: Select the media player that needs to be paused.
+      name: Odtwarzacz multimedialny
+      description: Wybierz odtwarzacz multimedialny, który ma zostać wstrzymany.
       selector:
         entity:
           domain: media_player
