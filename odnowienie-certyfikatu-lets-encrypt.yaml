@@ -1,0 +1,111 @@
+blueprint:
+  name: Odnowienie Certyfikatu Let's Encrypt
+  description: Odnów certyfikat, gdy termin ważności jest poniżej podanej wartości.
+  domain: automation
+  input:
+    cert_expiry_sensor:
+      name: Czujnik wygaśnięcia certyfikatu
+      description: Czujnik z integracji z wygaśnięciem certyfikatu (https://www.home-assistant.io/integrations/cert_expiry).
+      selector:
+        entity:
+          integration: cert_expiry
+    renew_date:
+      name: Dzień odnowienia certyfikatu
+      description: Dzień przed upłynięciem którego certyfikat SSL będzie odnowiony.
+      selector:
+        number:
+          min: 1.0
+          max: 29.0
+          mode: slider
+          unit_of_measurement: dni
+          step: 1.0
+      default: 5
+    time_to_check_cert:
+      name: Godzina sprawdzania certyfikatu
+      description: Godzina sprawdzenia ważności certyfikatu.
+      selector:
+        time: {}
+    restart_after_renewal:
+      name: Restart Home Assistant
+      description: Po odnowieniu certyfikatu ponownie uruchamia Home Asistanta. (jeśli
+        włączone).
+      selector:
+        boolean: {}
+      default: true
+    minuts_till_restart:
+      name: Minuty do ponownego uruchomienia
+      description: Minuty do ponownego uruchomienia Home Assistanta, jeśli ponowne
+        uruchomienie jest włączone.
+      selector:
+        number:
+          min: 1.0
+          max: 60.0
+          mode: slider
+          unit_of_measurement: minut
+          step: 1.0
+      default: 5
+    send_notification:
+      name: Wyślij powiadomienie
+      description: Wysyła powiadomienie do urządzenia, jeśli opcja jest włączona.
+      selector:
+        boolean: {}
+      default: false
+    notification_device:
+      name: Urządzenie do powiadomienia
+      description: Urządzenie, które zostanie powiadomione.
+      selector:
+        device:
+          integration: mobile_app
+    notification_title:
+      name: Tytuł powiadomienia
+      description: Tytuł powiadomienia dla powiadomienia wysyłanego po odnowieniu
+        certyfikatu.
+    notification_message:
+      name: Treść powiadomienia
+      description: Powiadomienie wysyłane po odnowieniu certyfikatu.
+  source_url: https://gist.github.com/MariuszTr/8eab9d0f46a41b9363f63cb85ad10b3e
+alias: Renew SSL Cert
+description: ''
+trigger:
+- platform: time
+  at: !input 'time_to_check_cert'
+condition:
+- condition: template
+  value_template: '{{ expire_days_var < var_check }}'
+action:
+- service: hassio.addon_start
+  data:
+    addon: core_letsencrypt
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ send_notification_var }}'
+    sequence:
+    - device_id: !input 'notification_device'
+      domain: mobile_app
+      type: notify
+      title: '{{ message_title_var }}'
+      message: '{{ message_var }}'
+  default: []
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ restart_after_renewal_var }}'
+    sequence:
+    - delay:
+        hours: 0
+        minutes: !input 'minuts_till_restart'
+        seconds: 0
+        milliseconds: 0
+    - service: hassio.host_reboot
+  default: []
+mode: single
+variables:
+  certificate_var: !input 'cert_expiry_sensor'
+  var_check: !input 'renew_date'
+  message_var: !input 'notification_message'
+  message_title_var: !input 'notification_title'
+  restart_after_renewal_var: !input 'restart_after_renewal'
+  send_notification_var: !input 'send_notification'
+  expire_days_var: '{{ ((as_timestamp(states(certificate_var)) - as_timestamp(now()))
+    / 60 / 60 / 24 ) | int }}'
