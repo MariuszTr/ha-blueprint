@@ -1,6 +1,6 @@
 blueprint:
   name: Aktywne powiadomienia na Androida po wejściu do strefy
-  description: 
+  description: Test
   domain: automation
   input:
     notify_device:
