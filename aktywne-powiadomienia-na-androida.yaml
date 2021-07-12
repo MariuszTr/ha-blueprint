@@ -1,6 +1,14 @@
 blueprint:
   name: Aktywne powiadomienia na Androida
-  description: test
+  description: |
+    Wysyłaj aktywne powiadomienia na urządzenie z Androidem
+    Dla każdej akcji możesz otworzyć adres URL, aplikację na urządzeniu lub załadować widok / pulpit nawigacyjny lovelace.
+    Jeśli planujesz używać widoku lovelace, format to /lovelace/test, gdzie test jest zastępowany przez zdefiniowaną ścieżkę w zdefiniowanym widoku.
+    Jeśli planujesz używać pulpitu nawigacyjnego lovelace, format będzie wyglądał następująco /lovelace-dashboard/view, gdzie /lovelace-dashboard/ jest zastępowany przez zdefiniowany adres URL pulpitu nawigacyjnego
+    a widok zostanie zastąpiony zdefiniowaną ścieżką w tym kokpicie.
+    Aby wybrać aplikację do otwarcia, poprzedź nazwę pakietu przedrostkiem app://.
+    Jeśli urządzenie nie ma zainstalowanej aplikacji, aplikacja Home Assistant otworzy się na domyślnej stronie.
+    Jeśli zdefiniujesz akcję i identyfikator URI dla przycisku, URI będzie miał pierwszeństwo przed akcją.
   domain: automation
   input:
     notify_device:
