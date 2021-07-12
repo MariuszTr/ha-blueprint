@@ -1,6 +1,6 @@
 blueprint:
   name: Aktywne powiadomienia na Androida po wejściu do strefy
-  description:|
+  description: |
     Wysyłaj aktywne powiadomienia na urządzenie z Androidem, gdy osoba wchodzi do strefy.
     Dla każdej akcji możesz otworzyć adres URL, aplikację na urządzeniu lub załadować widok / pulpit nawigacyjny lovelace.
     Jeśli planujesz używać widoku lovelace, format to /lovelace/test, gdzie test jest zastępowany przez zdefiniowaną ścieżkę w zdefiniowanym widoku.
