@@ -1,5 +1,5 @@
 blueprint:
-  name: Aktywne powiadomienia na Androida
+  name: Aktywne powiadomienia na Androida z sensorami binarnymi
   description: |
     Wysyłaj aktywne powiadomienia na urządzenie z Androidem
     Dla każdej akcji możesz otworzyć adres URL, aplikację na urządzeniu lub załadować widok / pulpit nawigacyjny lovelace.
