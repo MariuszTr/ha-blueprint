@@ -1,6 +1,7 @@
 blueprint:
   name: Aktywne powiadomienia na Androida
-  description: Wysyłaj aktywne powiadomienia na urządzenie z Androidem
+  description: >
+    Wysyłaj aktywne powiadomienia na urządzenie z Androidem
     Dla każdej akcji możesz otworzyć adres URL, aplikację na urządzeniu lub załadować widok / pulpit nawigacyjny lovelace.
     Jeśli planujesz używać widoku lovelace, format to /lovelace/test, gdzie test jest zastępowany przez zdefiniowaną ścieżkę w zdefiniowanym widoku.
     Jeśli planujesz używać pulpitu nawigacyjnego lovelace, format będzie wyglądał następująco /lovelace-dashboard/view, gdzie /lovelace-dashboard/ jest zastępowany przez zdefiniowany adres URL pulpitu nawigacyjnego
