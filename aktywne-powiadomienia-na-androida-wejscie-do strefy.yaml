@@ -1,7 +1,7 @@
 blueprint:
   name: Aktywne powiadomienia na Androida po wejściu do strefy
   description: 
-    Wysyła powiadomienia z możliwymi do wykonania akacjami na urządzenie z systemem Android, gdy osoba wchodzi do strefy.
+    Wysyłaj aktywne powiadomienia na urządzenie z Androidem, gdy osoba wchodzi do strefy.
 
     For each action, you can open an URL, an application on the device or load a lovelace
     view/dashboard.
